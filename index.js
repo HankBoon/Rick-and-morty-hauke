@@ -36,20 +36,16 @@ async function fetchAndRenderCharacters(
   const data = await response.json();
 
   maxPage = data.info.pages;
-  console.log("maxpages", maxPage);
-  console.log("page", page);
   pagination.textContent = `${page} / ${maxPage}`;
 
   cardContainer.innerHTML = "";
   data.results.forEach((result) => {
     cardContainer.append(CharacterCard(result));
   });
-  console.log(data);
   return data;
 }
 
 prevButton.addEventListener("click", () => {
-  console.log(maxPage);
   if (page > 1) {
     page--;
     fetchAndRenderCharacters("character", page, searchQuery);
@@ -57,7 +53,6 @@ prevButton.addEventListener("click", () => {
 });
 
 nextButton.addEventListener("click", () => {
-  console.log(maxPage);
   if (page < maxPage) {
     page++;
     fetchAndRenderCharacters("character", page, searchQuery);
